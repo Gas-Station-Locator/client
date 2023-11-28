@@ -1,27 +1,24 @@
 import React, { useState, useEffect } from 'react'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import HomePage from './pages/HomePage'
+import About from './pages/About'
+import Contact from './pages/Contact'
+// components
+import NavBar from './components/NavBar'
+// css
+import './App.css'
 
-function App() {
-  const [backendData, setBackendData] = useState([{}])
-  useEffect(() => {
-    /** 
-        /api instead of 'http://localhost:5000' 
-        relative route defined by proxy in package.json
-    **/
-    fetch("/api")
-      .then((res) => res.json())
-      .then((data) => { setBackendData(data) })
-  }, [])
-
+const App = () => {
   return (
-    <div>
-      {(typeof backendData.users === "undefined") ? (
-        <p>Loading...</p>
-      ) : (
-        backendData.users.map((user, i) => (
-          <p key={i}>{user}</p>
-        ))
-      )}
-    </div>
+    <Router>
+      <NavBar />
+      <Routes>
+        <Route path="/Contact-Us" element={<Contact />} />
+        <Route path="/About-Us" element={<About />} />
+        <Route path="/Gas-Station-Locator" element={<HomePage />} />
+        <Route path="/" element={<Navigate to="/Gas-Station-Locator" replace />} />
+      </Routes>
+    </Router>
   )
 }
 
