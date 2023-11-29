@@ -48,7 +48,15 @@ const HomePage = () => {
           disableDefaultUI={true}
         />
       </div>
-      <button onClick={handleMapStyleChange} className="change-map-style">
+      <button
+        onClick={handleMapStyleChange}
+        className="change-map-style"
+        style={{
+          color: mapConfig.id === "dark" ? "white" : "black",
+          backgroundColor: mapConfig.id === "dark" ? "#3c4042" : "#e8eaec",
+          borderColor: mapConfig.id === "dark" ? "#e8eaec" : "#3c4042",
+        }}
+      >
         Toggle
       </button>
     </APIProvider>
@@ -76,7 +84,7 @@ const LIGHT_MAP_STYLES = [
   {
     featureType: "landscape.natural.terrain",
     elementType: "geometry",
-    stylers: [{ color: "#000000" }],
+    stylers: [{ color: "#ffffff" }],
   },
   {
     featureType: "landscape.natural.landcover",
