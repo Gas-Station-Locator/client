@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import HomePage from './pages/HomePage'
-import About from './pages/About'
-import Contact from './pages/Contact'
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 // components
-import NavBar from './components/NavBar'
+import NavBar from "./components/NavBar";
 // css
-import './App.css'
+import "./App.css";
 
 const App = () => {
   return (
@@ -16,10 +21,13 @@ const App = () => {
         <Route path="/Contact-Us" element={<Contact />} />
         <Route path="/About-Us" element={<About />} />
         <Route path="/Gas-Station-Locator" element={<HomePage />} />
-        <Route path="/" element={<Navigate to="/Gas-Station-Locator" replace />} />
+        <Route
+          path="/"
+          element={<Navigate to="/Gas-Station-Locator" replace />}
+        />
       </Routes>
     </Router>
-  )
-}
+  );
+};
 
-export default App
+export default App;
