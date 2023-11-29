@@ -1,0 +1,29 @@
+@import url(https://fonts.googleapis.com/css?family=Lato);
+
+.nav-container {
+    background-color: #3c4042;
+    padding-bottom: 3vh;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    border-bottom: black;
+    border-width: thick;
+}
+
+.nav-container a {
+    margin-top: 25px;
+    margin-right: 75px;
+    font-family: 'Lato';
+    font-size: 30px; 
+}
+
+.nav-container a:link,
+.nav-container a:visited {
+    color:white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.nav-container a:last-child {
+    margin-right: 20px;
+}
