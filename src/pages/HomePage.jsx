@@ -1,13 +1,17 @@
 "use client";
 
 import React, { useState } from "react";
-import { APIProvider, Map } from "@vis.gl/react-google-maps";
+import { Map, APIProvider } from "@vis.gl/react-google-maps";
+import { useNavigate } from "react-router-dom";
+import ToggleButton from "../components/ToggleButton";
+import SearchBar from "../components/SearchBar";
 import "./css/HomePage.css";
 
 const HomePage = () => {
   const [mapConfig, setMapConfig] = useState(MAP_CONFIGS[1]);
-  const position = { lat: 38.25, lng: 263.08 };
   const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+  const position = { lat: 38.25, lng: 263.08 };
+  const navigate = useNavigate();
 
   const handleMapStyleChange = () => {
     const newMapConfig =
@@ -15,22 +19,13 @@ const HomePage = () => {
     setMapConfig(newMapConfig);
   };
 
+  const handleSearchPage = () => {
+    navigate("/Search");
+  };
+
   return (
     // display map from google maps api
-    <APIProvider apiKey={apiKey}>
-      <div className="find-gas-container">
-        <h1 style={{ color: mapConfig.id === "dark" ? "#3c4042" : "white" }}>
-          Find Gas Near You...
-        </h1>
-        <div id="search-bar">
-          <input
-            type="text"
-            placeholder="Search by state, city, or zip code"
-            id="search-input"
-            name="searchInput"
-          />
-        </div>
-      </div>
+    <APIProvider apiKey={apiKey} libraries={["places"]}>
       <div
         className="map-container"
         style={{ padding: "0px", margin: "0px", height: "100vh" }}
@@ -48,17 +43,30 @@ const HomePage = () => {
           disableDefaultUI={true}
         />
       </div>
-      <button
+      <div className="find-gas-container">
+        <h1 style={{ color: mapConfig.id === "dark" ? "#3c4042" : "white" }}>
+          Find Gas Near You...
+        </h1>
+        <button
+          className="search-transition-btn"
+          onClick={handleSearchPage}
+          style={{
+            color: mapConfig.id === "dark" ? "white" : "black",
+            backgroundColor: mapConfig.id === "dark" ? "#3c4042" : "white",
+            borderColor: mapConfig.id === "dark" ? "#e8eaec" : "#3c4042",
+          }}
+        >
+          Start Searching!
+        </button>
+      </div>
+      <ToggleButton
         onClick={handleMapStyleChange}
-        className="change-map-style"
-        style={{
+        styles={{
           color: mapConfig.id === "dark" ? "white" : "black",
           backgroundColor: mapConfig.id === "dark" ? "#3c4042" : "#e8eaec",
           borderColor: mapConfig.id === "dark" ? "#e8eaec" : "#3c4042",
         }}
-      >
-        Toggle
-      </button>
+      />
     </APIProvider>
   );
 };

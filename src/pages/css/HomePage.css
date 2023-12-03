@@ -49,3 +49,15 @@ input {
 .change-map-style:hover {
   background-color: darkgray; /* Change color on hover */
 }
+
+.during-popup {
+  filter: brightness(50%);
+}
+
+.search-transition-btn {
+  width: 200px;
+  height: 50px;
+  font-size: 25px;
+  border-radius: 5px;
+  outline: none;
+}

@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./css/NavBar.css";
-import Image76 from "../images/76.png";
-import ImageChevron from "../images/chevron.png";
-import ImageMobil from "../images/mobil.png";
+import Image76 from "../assets/images/76.png";
+import ImageChevron from "../assets/images/chevron.png";
+import ImageMobil from "../assets/images/mobil.png";
 
 const NavBar = () => {
   return (
