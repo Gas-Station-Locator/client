@@ -1,41 +1,39 @@
-div .main{
-	overflow: auto;
-	overflow-y: scroll;
-	height: 650px;
+div .main {
+  overflow: auto;
+  overflow-y: scroll;
+  height: 650px;
 }
+
 .imageDesc1 {
-	margin: 10px;
-	display: flex;
-	align-items: right;
-	margin-left: auto;
-	margin-right: auto;
-	justify-content: center;
+  margin: 10px;
+  display: flex;
+  align-items: right;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
+}
 
-  }
-  
-  .image {
-	max-width: 50%;
-	float: center;
-	border: 3px solid white;
-	border-radius: 10px;
-	margin-right: 15px;
+.image {
+  max-width: 50%;
+  float: center;
+  border: 3px solid white;
+  border-radius: 10px;
+  margin-right: 15px;
+}
 
-  }
+.imageDesc1 .text-container {
+  background-color: lightgrey;
+  float: center;
+}
 
-  
-  .imageDesc1 .text-container{
-	background-color: lightgrey;
-	float: center;
-  }
+.imageDesc2 {
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .imageDesc2 {
-	margin: 20px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-  }
-  
-  .imageDesc2 .text-container{
-	background-color: lightgrey;
-	float: center;
-  }
+.imageDesc2 .text-container {
+  background-color: lightgrey;
+  float: center;
+}
