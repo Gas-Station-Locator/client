@@ -1,18 +1,46 @@
 import React from "react";
 import "./css/AboutUs.css";
+import doge from "./images/doge.jpg";
 
 const About = () => {
   return (
-    <div>
+    <div className="main">
       <h1>About</h1>
-      <p>
-        This project was made by Ethan Jacinto, Cody Apolinar, Elvin Nguyen, and
-        James Salac <br />
-        <br />
-        We are all Cal Poly Pomona Students. This project was created using
-        topics learned in CS2250. Some of these include React, CSS, JS, HTML,
-        and many more.
-      </p>
+      <div className="imageDesc1">
+        <img src={doge} alt="Description"className="image" />
+        <div className="text-container">
+          <p>Sample Text Hyperspace cam LLLLLLLl
+			LLLLLLLLLLLLLLLLLLLLLLLLLLLLL </p>
+        </div>
+      </div>
+
+	  <div className="imageDesc2">
+        
+        <div className="text-container">
+          <p>Sample Text Hyperspace cam </p>
+        </div>
+		<img src={doge} alt="Description"className="image" />
+      </div>
+
+	  <div className="imageDesc2">
+        <img src={doge} alt="Description"className="image" />
+        <div className="text-container">
+          <p>Sample Text Hyperspace cam </p>
+        </div>
+      </div>
+
+	  <div className="imageDesc2">
+        
+        <div className="text-container">
+          <p>Sample Text Hyperspace cam </p>
+        </div>
+		<img src={doge} alt="Description"className="image" />
+      </div>
+
+	  
+
+	  
+
     </div>
   );
 };

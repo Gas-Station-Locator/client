@@ -41,6 +41,7 @@ setDefaults({
 
 const Search = () => {
   const { theme, toggleTheme } = useTheme();
+  const [markerPosition, setMarkerPosition] = useState({ defaultCenter });
   const [tomData, setTomData] = useState(null);
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -84,6 +85,7 @@ const Search = () => {
       const { lat, lng } = results[0].geometry.location;
       console.log(lat, lng);
       defaultCenter = { lat: lat, lng: lng };
+      setMarkerPosition(defaultCenter);
     });
     map.panTo(defaultCenter);
     return "Here are the nearest Gas Stations:";
@@ -144,7 +146,7 @@ const Search = () => {
         <Autocomplete>
           <input
             type="text"
-            placeholder="Enter Location..."
+            placeholder="Enter Your Location..."
             ref={originRef}
             className="search-input"
           />
