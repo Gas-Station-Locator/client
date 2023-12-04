@@ -4,18 +4,20 @@ import React, { useState } from "react";
 import { Map, APIProvider } from "@vis.gl/react-google-maps";
 import { useNavigate } from "react-router-dom";
 import ToggleButton from "../components/ToggleButton";
-import SearchBar from "../components/SearchBar";
+import { useTheme } from "../assets/ThemeContext";
 import "./css/HomePage.css";
 
 const HomePage = () => {
-  const [mapConfig, setMapConfig] = useState(MAP_CONFIGS[1]);
+  const { theme, toggleTheme } = useTheme();
+  const [mapConfig, setMapConfig] = useState(theme === "dark" ? MAP_CONFIGS[1] : MAP_CONFIGS[0]);
   const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
   const position = { lat: 38.25, lng: 263.08 };
   const navigate = useNavigate();
 
   const handleMapStyleChange = () => {
+    toggleTheme();
     const newMapConfig =
-      mapConfig.id === "dark" ? MAP_CONFIGS[0] : MAP_CONFIGS[1];
+      theme === "dark" ? MAP_CONFIGS[0] : MAP_CONFIGS[1];
     setMapConfig(newMapConfig);
   };
 
@@ -44,16 +46,16 @@ const HomePage = () => {
         />
       </div>
       <div className="find-gas-container">
-        <h1 style={{ color: mapConfig.id === "dark" ? "#3c4042" : "white" }}>
+        <h1 style={{ color: theme === "dark" ? "#3c4042" : "white" }}>
           Find Gas Near You...
         </h1>
         <button
           className="search-transition-btn"
           onClick={handleSearchPage}
           style={{
-            color: mapConfig.id === "dark" ? "white" : "black",
-            backgroundColor: mapConfig.id === "dark" ? "#3c4042" : "white",
-            borderColor: mapConfig.id === "dark" ? "#e8eaec" : "#3c4042",
+            color: theme === "dark" ? "#e8eaec" : "#3c4042",
+            backgroundColor: theme === "dark" ? "#3c4042" : "white",
+            borderColor: theme === "dark" ? "#e8eaec" : "#3c4042",
           }}
         >
           Start Searching!
@@ -62,9 +64,9 @@ const HomePage = () => {
       <ToggleButton
         onClick={handleMapStyleChange}
         styles={{
-          color: mapConfig.id === "dark" ? "white" : "black",
-          backgroundColor: mapConfig.id === "dark" ? "#3c4042" : "#e8eaec",
-          borderColor: mapConfig.id === "dark" ? "#e8eaec" : "#3c4042",
+          color: theme === "dark" ? "#e8eaec" : "#3c4042",
+          backgroundColor: theme === "dark" ? "#3c4042" : "#e8eaec",
+          borderColor: theme === "dark" ? "#e8eaec" : "#3c4042",
         }}
       />
     </APIProvider>

@@ -18,6 +18,7 @@ import {
   geocode,
   RequestType,
 } from "react-geocode";
+import { useTheme } from "../assets/ThemeContext";
 import Tom from "../apis/tomtom";
 import "./css/Search.css";
 
@@ -39,6 +40,7 @@ setDefaults({
 */
 
 const Search = () => {
+  const { theme, toggleTheme } = useTheme();
   const [tomData, setTomData] = useState(null);
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -85,10 +87,11 @@ const Search = () => {
     });
     map.panTo(defaultCenter);
     return "Here are the nearest Gas Stations:";
-    // <GoogleMap>
-    //   <MarkerF position={defaultCenter}/>
-    // </GoogleMap>
-    // addMarker(defaultCenter);
+    /** <GoogleMap>
+          <MarkerF position={defaultCenter}/>
+        </GoogleMap>
+          addMarker(defaultCenter);
+    **/
   }
 
   function clearRoute() {
@@ -117,92 +120,54 @@ const Search = () => {
           {directionsResponse && (
             <DirectionsRenderer directions={directionsResponse} />
           )}
+          <div className="position">
+            <button
+              type="button"
+              className="btn position-btn"
+              onClick={() => map.panTo(defaultCenter)}
+              style={{
+                color: theme === "dark" ? "#e8eaec" : "#3c4042",
+                backgroundColor: theme === "dark" ? "#3c4042" : "#e8eaec",
+                borderColor: theme === "dark" ? "#e8eaec" : "#3c4042",
+              }}
+            >
+              Center
+            </button>
+          </div>
         </GoogleMap>
       </div>
 
-      <div className="search">
+      <div
+        className="search"
+        style={{ backgroundColor: theme === "dark" ? "#f1f3f4" : "#3c4042" }}
+      >
         <Autocomplete>
-          <input type="text" placeholder="Enter Location..." ref={originRef} />
+          <input
+            type="text"
+            placeholder="Enter Location..."
+            ref={originRef}
+            className="search-input"
+          />
         </Autocomplete>
-        <button type="submit" onClick={searchPlace}>
+        <button
+          type="submit"
+          onClick={searchPlace}
+          className="btn search-btn map-btn"
+        >
           Search
         </button>
-        <button type="submit" onClick={calculateRoute}>
+        <button type="submit" onClick={calculateRoute} className="btn map-btn">
           Calculate Route
         </button>
-        <p>Distance: </p>
-        <p>Duration: </p>
-        <button className="position" onClick={clearRoute}>
+        <p className="destination-info">Distance: </p>
+        <p className="destination-info">Duration: </p>
+        <button type="button" className="btn clear-btn" onClick={clearRoute}>
           Clear
         </button>
+        {console.log(defaultCenter)}
       </div>
-      <div>
-        <button className="position" onClick={() => map.panTo(defaultCenter)}>
-          Center
-        </button>
-      </div>
-      {console.log(defaultCenter)}
     </div>
   );
 };
 
 export default Search;
-
-/**
-const MapTypeId = {
-  HYBRID: "hybrid",
-  ROADMAP: "roadmap",
-  SATELLITE: "satellite",
-  TERRAIN: "terrain",
-};
-
-const SEARCH_MAP_STYLES = [
-  {
-    featureType: "poi.attraction",
-    elementType: "labels",
-    stylers: [{ visibility: "off" }],
-  },
-  {
-    featureType: "poi.business",
-    elementType: "labels",
-    stylers: [{ visibility: "off" }],
-  },
-  {
-    featureType: "poi.government",
-    elementType: "labels",
-    stylers: [{ visibility: "off" }],
-  },
-  {
-    featureType: "poi.medical",
-    elementType: "labels",
-    stylers: [{ visibility: "off" }],
-  },
-  {
-    featureType: "poi.park",
-    elementType: "labels",
-    stylers: [{ visibility: "off" }],
-  },
-  {
-    featureType: "poi.place_of_worship",
-    elementType: "labels",
-    stylers: [{ visibility: "off" }],
-  },
-  {
-    featureType: "poi.school",
-    elementType: "labels",
-    stylers: [{ visibility: "off" }],
-  },
-  {
-    featureType: "poi.sports_complex",
-    elementType: "labels",
-    stylers: [{ visibility: "off" }],
-  },
-];
-
-const MAP_CONFIG = {
-  id: "search",
-  label: "Search Map",
-  mapTypeId: MapTypeId.ROADMAP,
-  styles: SEARCH_MAP_STYLES,
-};
-*/
