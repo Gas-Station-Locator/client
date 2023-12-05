@@ -1,6 +1,7 @@
 import React from "react";
 import "./css/Contact.css";
 import phone from "./images/phone.png"
+
 const Contact = () => {
   return (
     <div>
