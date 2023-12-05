@@ -151,16 +151,17 @@ const Search = () => {
     map.panTo(defaultCenter);
     console.log(defaultCenter.lat, defaultCenter.lng);
 
-    /** return (
-          <div>
-            <p>The nearest gas stations are: </p>
-            {<Stations lat={defaultCenter.lat} lng={defaultCenter.lng} /> /}
-          </div>
-        );
-        <GoogleMap>
-          <MarkerF position={defaultCenter}/>
-        </GoogleMap>
-          addMarker(defaultCenter);
+    /** 
+      return (
+        <div>
+          <p>The nearest gas stations are: </p>
+          {<Stations lat={defaultCenter.lat} lng={defaultCenter.lng} /> /}
+        </div>
+      );
+      <GoogleMap>
+        <MarkerF position={defaultCenter}/>
+      </GoogleMap>
+        addMarker(defaultCenter);
     */
   }
 
