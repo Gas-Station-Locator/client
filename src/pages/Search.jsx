@@ -21,8 +21,8 @@ import {
 import { useTheme } from "../assets/ThemeContext";
 import "./css/Search.css";
 
-let defaultCenter = { lat: 34.01804962044509, lng: -117.90501316026715 };
-// let defaultCenter = { lat: 32.7157, lng: -117.1611};
+// let defaultCenter = { lat: 34.01804962044509, lng: -117.90501316026715 };
+let defaultCenter = { lat: 32.7157, lng: -117.1611};
 const google = window.google;
 setDefaults({
   key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -44,6 +44,8 @@ const Search = () => {
   const [lat, setLat] = useState();
   const [lng, setLng] = useState();
   const [stations, setStations] = useState(null);
+  const [gasMarkers, setGasMarkers] = useState();
+  const [gasMarkersArr, setGasMarkersArr] = useState([]);
 
   useEffect(() => {
     console.log(stations);
@@ -92,16 +94,26 @@ const Search = () => {
       };
       fetchData();
     }, []);
-
+  
     return (
       <div className="Tom">
         <ul style={{ listStyle: "none" }}>
           {data.map((item) => {
+
+            let address = `${item.address.streetNumber} ${item.address.streetName}, ${item.address.municipality}, ${item.address.countrySubdivision} ${item.address.postalCode}`;
+            console.log(address);
+            fromAddress(address).then(({ results }) => {
+              const { lat, lng } = results[0].geometry.location;
+              let markerPos = { lat: lat, lng: lng };
+              setGasMarkers(markerPos)
+              setGasMarkersArr((gasMarkersArr) => [...gasMarkersArr,
+                {position: markerPos}]);
+              // gasMarkersArr.push({gasMarkers})
+              // console.log(gasMarkersArr)
+            })
             return (
               <li key={item.id}>
-                Address: {item.address.streetNumber} {item.address.streetName},
-                {item.address.municipality}, {item.address.countrySubdivision}{" "}
-                {item.address.postalCode} --- Name: {item.poi.name}
+                Address: {address} --- Name: {item.poi.name}
               </li>
             );
           })}
@@ -130,23 +142,26 @@ const Search = () => {
       return;
     }
     newLocation();
-    // fromAddress(originRef.current.value).then(({ results }) => {
-    //   const { lat, lng } = results[0].geometry.location;
-    //   defaultCenter = { lat: lat, lng: lng };
-    // });
+    /** 
+      fromAddress(originRef.current.value).then(({ results }) => {
+        const { lat, lng } = results[0].geometry.location;
+        defaultCenter = { lat: lat, lng: lng };
+      });
+    */
     map.panTo(defaultCenter);
     console.log(defaultCenter.lat, defaultCenter.lng);
 
-    return (
-      <div>
-        <p>The nearest gas stations are: </p>
-        {/* <Stations lat={defaultCenter.lat} lng={defaultCenter.lng} /> */}
-      </div>
-    );
-    // <GoogleMap>
-    //   <MarkerF position={defaultCenter}/>
-    // </GoogleMap>
-    // addMarker(defaultCenter);
+    /** return (
+          <div>
+            <p>The nearest gas stations are: </p>
+            {<Stations lat={defaultCenter.lat} lng={defaultCenter.lng} /> /}
+          </div>
+        );
+        <GoogleMap>
+          <MarkerF position={defaultCenter}/>
+        </GoogleMap>
+          addMarker(defaultCenter);
+    */
   }
 
   function newLocation() {
@@ -199,6 +214,9 @@ const Search = () => {
           onLoad={(map) => setMap(map)}
         >
           <MarkerF position={defaultCenter} />
+          {gasMarkersArr.map(gasMarkers => (
+              <MarkerF position={gasMarkers.position} />
+          ))}
           {directionsResponse && (
             <DirectionsRenderer directions={directionsResponse} />
           )}
@@ -238,6 +256,7 @@ const Search = () => {
             searchPlace();
             // setLat(defaultCenter.lat);
             // setLng(defaultCenter.lng);
+            setGasMarkersArr([]);
           }}
         >
           Search
