@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import HomePage from './pages/HomePage'
 import About from './pages/About'
 import Contact from './pages/Contact'
+import Login from './pages/Login'
+import SignUp from './pages/SignUp'
 // components
 import NavBar from './components/NavBar'
 // css
@@ -16,6 +18,8 @@ const App = () => {
         <Route path="/Contact-Us" element={<Contact />} />
         <Route path="/About-Us" element={<About />} />
         <Route path="/Gas-Station-Locator" element={<HomePage />} />
+		<Route path="/Login" element={<Login/>}/>
+		<Route path="SignUp" element={<SignUp/>} />
         <Route path="/" element={<Navigate to="/Gas-Station-Locator" replace />} />
       </Routes>
     </Router>
