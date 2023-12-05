@@ -69,30 +69,30 @@ const Search = () => {
   }
 
   function Tom(props) {
-    const [lat, setLat] = useState(props.lat);    
-    const [lng, setLng] = useState(props.lng); 
-  
+    const [lat, setLat] = useState(props.lat);
+    const [lng, setLng] = useState(props.lng);
+
     useEffect(() => {
-      setLat(props.lat)
-      setLng(props.lng)
+      setLat(props.lat);
+      setLng(props.lng);
     }, [props.lat, props.lng]);
-  
+
     // let defaultCenter = {lat: props.lat, lng: props.lng}
     const URL = `https://api.tomtom.com/search/2/nearbySearch/.json?lat=${lat}&lon=${lng}&radius=10000&categorySet=7311&view=Unified&relatedPois=off&key=${process.env.REACT_APP_TOM_KEY}`;
-  
+
     const [data, setData] = useState([]);
-  
+
     useEffect(() => {
       const fetchData = async () => {
         const response = await fetch(URL);
         const data = await response.json();
-        
+
         setData(data.results);
         console.log(data);
-      }
+      };
       fetchData();
     }, []);
-  
+
     return (
       <div className="Tom">
         <ul style={{ listStyle: "none" }}>
@@ -148,7 +148,7 @@ const Search = () => {
     // </GoogleMap>
     // addMarker(defaultCenter);
   }
-  
+
   function newLocation() {
     fromAddress(originRef.current.value).then(({ results }) => {
       const { lat, lng } = results[0].geometry.location;
@@ -157,19 +157,22 @@ const Search = () => {
       setLng(defaultCenter.lng);
     });
   }
-  
+
   function nearestStations() {
     setStations(
-    <div className="search-results-container" style={{
-      color: theme === "dark" ? "black" : "white",
-      backgroundColor: theme === "dark" ? "#f1f3f4" : "#3c4042"
-    }}> 
-      <h1>The nearest gas stations are:</h1>
-      <div className="search-result">
-        <Tom lat={defaultCenter.lat} lng={defaultCenter.lng} />
+      <div
+        className="search-results-container"
+        style={{
+          color: theme === "dark" ? "black" : "white",
+          backgroundColor: theme === "dark" ? "#f1f3f4" : "#3c4042",
+        }}
+      >
+        <h1>The nearest gas stations are:</h1>
+        <div className="search-result">
+          <Tom lat={defaultCenter.lat} lng={defaultCenter.lng} />
+        </div>
       </div>
-    </div>
-    )
+    );
     // <Stations lat={defaultCenter.lat} lng={defaultCenter.lng} />
   }
 
@@ -193,7 +196,8 @@ const Search = () => {
             mapTypeControl: false,
             fullscreenControl: false,
           }}
-          onLoad={(map) => setMap(map)}>
+          onLoad={(map) => setMap(map)}
+        >
           <MarkerF position={defaultCenter} />
           {directionsResponse && (
             <DirectionsRenderer directions={directionsResponse} />
@@ -234,7 +238,8 @@ const Search = () => {
             searchPlace();
             // setLat(defaultCenter.lat);
             // setLng(defaultCenter.lng);
-          }}>
+          }}
+        >
           Search
         </button>
         <button type="submit" onClick={calculateRoute} className="btn map-btn">
@@ -250,7 +255,11 @@ const Search = () => {
           Clear
         </button>
         <br />
-        <button type="submit" onClick={nearestStations} className="btn map-btn nearest-stations-btn">
+        <button
+          type="submit"
+          onClick={nearestStations}
+          className="btn map-btn nearest-stations-btn"
+        >
           Stations near me:
         </button>
         {console.log(defaultCenter.lat, defaultCenter.lng)}
