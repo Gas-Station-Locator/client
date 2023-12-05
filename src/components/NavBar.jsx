@@ -6,6 +6,7 @@ import ImageChevron from "../assets/images/chevron.png";
 import ImageMobil from "../assets/images/mobil.png";
 
 const NavBar = () => {
+
   return (
     <nav className="nav-container">
       <div id="nav-images">
@@ -16,9 +17,10 @@ const NavBar = () => {
       <Link to="/Gas-Station-Locator">Gas Station Locator</Link>
       <Link to="/About-Us">About Us</Link>
       <Link to="/Contact-Us">Contact Us</Link>
-      <Link to="/Sign-In">Sign In</Link>
+      <Link to="/Login">Sign In</Link>
     </nav>
   );
 };
+
 
 export default NavBar;
