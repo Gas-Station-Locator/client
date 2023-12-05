@@ -19,10 +19,10 @@ import {
   RequestType,
 } from "react-geocode";
 import { useTheme } from "../assets/ThemeContext";
-import Tom from "../apis/tomtom";
 import "./css/Search.css";
 
 let defaultCenter = { lat: 34.01804962044509, lng: -117.90501316026715 };
+// let defaultCenter = { lat: 32.7157, lng: -117.1611};
 const google = window.google;
 setDefaults({
   key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -41,8 +41,14 @@ setDefaults({
 
 const Search = () => {
   const { theme, toggleTheme } = useTheme();
-  const [markerPosition, setMarkerPosition] = useState({ defaultCenter });
-  const [tomData, setTomData] = useState(null);
+  const [lat, setLat] = useState();
+  const [lng, setLng] = useState();
+  const [stations, setStations] = useState(null);
+
+  useEffect(() => {
+    console.log(stations);
+  }, [stations]);
+
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries: ["places"],
@@ -60,6 +66,48 @@ const Search = () => {
 
   if (!isLoaded) {
     return "LOADING...";
+  }
+
+  function Tom(props) {
+    const [lat, setLat] = useState(props.lat);    
+    const [lng, setLng] = useState(props.lng); 
+  
+    useEffect(() => {
+      setLat(props.lat)
+      setLng(props.lng)
+    }, [props.lat, props.lng]);
+  
+    // let defaultCenter = {lat: props.lat, lng: props.lng}
+    const URL = `https://api.tomtom.com/search/2/nearbySearch/.json?lat=${lat}&lon=${lng}&radius=10000&categorySet=7311&view=Unified&relatedPois=off&key=${process.env.REACT_APP_TOM_KEY}`;
+  
+    const [data, setData] = useState([]);
+  
+    useEffect(() => {
+      const fetchData = async () => {
+        const response = await fetch(URL);
+        const data = await response.json();
+        
+        setData(data.results);
+        console.log(data);
+      }
+      fetchData();
+    }, []);
+  
+    return (
+      <div className="Tom">
+        <ul style={{ listStyle: "none" }}>
+          {data.map((item) => {
+            return (
+              <li key={item.id}>
+                Address: {item.address.streetNumber} {item.address.streetName},
+                {item.address.municipality}, {item.address.countrySubdivision}{" "}
+                {item.address.postalCode} --- Name: {item.poi.name}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    );
   }
 
   async function calculateRoute() {
@@ -81,19 +129,48 @@ const Search = () => {
     if (originRef.current.value === "") {
       return;
     }
+    newLocation();
+    // fromAddress(originRef.current.value).then(({ results }) => {
+    //   const { lat, lng } = results[0].geometry.location;
+    //   defaultCenter = { lat: lat, lng: lng };
+    // });
+    map.panTo(defaultCenter);
+    console.log(defaultCenter.lat, defaultCenter.lng);
+
+    return (
+      <div>
+        <p>The nearest gas stations are: </p>
+        {/* <Stations lat={defaultCenter.lat} lng={defaultCenter.lng} /> */}
+      </div>
+    );
+    // <GoogleMap>
+    //   <MarkerF position={defaultCenter}/>
+    // </GoogleMap>
+    // addMarker(defaultCenter);
+  }
+  
+  function newLocation() {
     fromAddress(originRef.current.value).then(({ results }) => {
       const { lat, lng } = results[0].geometry.location;
-      console.log(lat, lng);
       defaultCenter = { lat: lat, lng: lng };
-      setMarkerPosition(defaultCenter);
+      setLat(defaultCenter.lat);
+      setLng(defaultCenter.lng);
     });
-    map.panTo(defaultCenter);
-    return "Here are the nearest Gas Stations:";
-    /** <GoogleMap>
-          <MarkerF position={defaultCenter}/>
-        </GoogleMap>
-          addMarker(defaultCenter);
-    **/
+  }
+  
+  function nearestStations() {
+    setStations(
+    <div className="search-results-container" style={{
+      color: theme === "dark" ? "black" : "white",
+      backgroundColor: theme === "dark" ? "#f1f3f4" : "#3c4042"
+    }}> 
+      <h1>The nearest gas stations are:</h1>
+      <div className="search-result">
+        <Tom lat={defaultCenter.lat} lng={defaultCenter.lng} />
+      </div>
+    </div>
+    )
+    // <Stations lat={defaultCenter.lat} lng={defaultCenter.lng} />
   }
 
   function clearRoute() {
@@ -116,8 +193,7 @@ const Search = () => {
             mapTypeControl: false,
             fullscreenControl: false,
           }}
-          onLoad={(map) => setMap(map)}
-        >
+          onLoad={(map) => setMap(map)}>
           <MarkerF position={defaultCenter} />
           {directionsResponse && (
             <DirectionsRenderer directions={directionsResponse} />
@@ -152,21 +228,34 @@ const Search = () => {
           />
         </Autocomplete>
         <button
-          type="submit"
-          onClick={searchPlace}
           className="btn search-btn map-btn"
-        >
+          type="submit"
+          onClick={() => {
+            searchPlace();
+            // setLat(defaultCenter.lat);
+            // setLng(defaultCenter.lng);
+          }}>
           Search
         </button>
         <button type="submit" onClick={calculateRoute} className="btn map-btn">
           Calculate Route
         </button>
+        <select name="destinations" className="destination-dropdown">
+          <option hidden>Choose a Gas Station</option>
+          <option>Test</option>
+        </select>
         <p className="destination-info">Distance: </p>
         <p className="destination-info">Duration: </p>
         <button type="button" className="btn clear-btn" onClick={clearRoute}>
           Clear
         </button>
-        {console.log(defaultCenter)}
+        <br />
+        <button type="submit" onClick={nearestStations} className="btn map-btn nearest-stations-btn">
+          Stations near me:
+        </button>
+        {console.log(defaultCenter.lat, defaultCenter.lng)}
+        {/* <Stations lat={defaultCenter.lat} lng={defaultCenter.lng} /> */}
+        {stations}
       </div>
     </div>
   );
