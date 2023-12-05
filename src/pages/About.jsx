@@ -7,40 +7,34 @@ const About = () => {
     <div className="main">
       <h1>About</h1>
       <div className="imageDesc1">
-        <img src={doge} alt="Description"className="image" />
+        <img src={doge} alt="Description" className="image" />
         <div className="text-container">
-          <p>Sample Text Hyperspace cam LLLLLLLl
-			LLLLLLLLLLLLLLLLLLLLLLLLLLLLL </p>
+          <p>
+            Sample Text Hyperspace cam LLLLLLLl LLLLLLLLLLLLLLLLLLLLLLLLLLLLL{" "}
+          </p>
         </div>
       </div>
 
-	  <div className="imageDesc2">
-        
-        <div className="text-container">
-          <p>Sample Text Hyperspace cam </p>
-        </div>
-		<img src={doge} alt="Description"className="image" />
-      </div>
-
-	  <div className="imageDesc2">
-        <img src={doge} alt="Description"className="image" />
+      <div className="imageDesc2">
         <div className="text-container">
           <p>Sample Text Hyperspace cam </p>
         </div>
+        <img src={doge} alt="Description" className="image" />
       </div>
 
-	  <div className="imageDesc2">
-        
+      <div className="imageDesc2">
+        <img src={doge} alt="Description" className="image" />
         <div className="text-container">
           <p>Sample Text Hyperspace cam </p>
         </div>
-		<img src={doge} alt="Description"className="image" />
       </div>
 
-	  
-
-	  
-
+      <div className="imageDesc2">
+        <div className="text-container">
+          <p>Sample Text Hyperspace cam </p>
+        </div>
+        <img src={doge} alt="Description" className="image" />
+      </div>
     </div>
   );
 };
