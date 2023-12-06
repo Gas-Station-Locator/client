@@ -11,17 +11,23 @@ function App(){
 
     // return(
         
-    const URL = `https://localhost:4000/getStations`;
+    const URL = `https://localhost:4000/getStations/results`;
 
     const [stations, setStations] = useState([]);
+    async function downloadPrice(index) {
+        const commentsURL = getstations/results;
+        const response = await fetch(commentsURL);
+        const comments = await resasyncponse.json();
+        return comments;
+    }
 
     useEffect(() => {
       const fetchData = async () => {
         const response = await fetch('/getStations');
         const data = await response.json();
 
-        setStations(data.results);
-        console.log(data);
+        setStations(data);
+        // console.log(data[0].results[0]);
       };
       fetchData();
     }, []);
@@ -46,7 +52,8 @@ function App(){
                     {
                         stations.map((station) => {
                             <tr>
-                                <td>{station.name}</td>
+                                {console.log(station)}
+                                <td>{station[0]}</td>
                                 <td>{station.address}</td>
                             </tr>
                         })
