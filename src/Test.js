@@ -31,8 +31,8 @@ function App() {
       setStations(data[0].results);
       setGasPrices(data[0].results.gasPrices);
       // console.log(data[0].results[1].gasPrices[0].priceTag);
-      console.log(data[0].results[1]);
-      console.log(data[0]);
+      // console.log(data[0].results[1]);
+      // console.log(data[0]);
     };
     fetchData();
   }, []);
@@ -46,8 +46,9 @@ function App() {
           return (
             <li key={item.id}>
               Address: {item.address} ---
-              Gas Price: {item.gasPrices.priceTag}
-              {console.log(item.gasPrices.priceTag)}
+              Gas Price Regular: {item.gasPrices[0].priceTag}
+              {console.log(item.gasPrices[0])}
+              {/* {console.log(item)} */}
             </li>
           )
         })}
