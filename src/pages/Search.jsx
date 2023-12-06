@@ -48,6 +48,35 @@ const Search = () => {
   const [gasMarkers, setGasMarkers] = useState();
   const [gasMarkersArr, setGasMarkersArr] = useState([]);
   const [selectedMarker, setSelectedMarker] = useState(null);
+  const [stationsList, setStationsList] = useState([]);
+  const [gasPrice, setGasPrice] = useState([]);
+
+  const URL = `https://localhost:4000/getStations`;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("/getStations");
+      const data = await response.json();
+
+      setStationsList(data[0].results);
+    };
+    fetchData();
+  }, []);
+  let stationTitle = [];
+  let stationPrices = [];
+  const arrayOfNamesAndPrices = [];
+
+  stationsList.map((item)=>{
+    stationTitle.push([item.title])
+  })
+  stationsList.map((item)=>{
+    stationPrices.push([item.gasPrices[0].priceTag])
+  })
+  // {console.log(stationPrices[Math.floor(Math.random()*stationPrices.length)])}
+  for(let i=0; i<stationTitle.length; i++) {
+    arrayOfNamesAndPrices[i] = { title: stationTitle[i][0], price: stationPrices[i][0]};
+  }
+  // console.log(arrayOfNamesAndPrices);
 
   useEffect(() => {
     console.log(stations);
@@ -102,7 +131,22 @@ const Search = () => {
         <ul style={{ listStyle: "none" }}>
           {data.map((item) => {
             let address = `${item.address.streetNumber} ${item.address.streetName}, ${item.address.municipality}, ${item.address.countrySubdivision} ${item.address.postalCode}`;
-            console.log(address);
+            let stationName = `${item.poi.name}`;
+            console.log(stationName)
+            for (let i = 0; i < stationTitle.length; i++) {
+              if (stationTitle[i][0] === stationName) {
+                  setGasPrice((gasPrice) => [
+                    ...gasPrice,
+                    stationPrices[i][0]
+                  ]);
+                  // console.log(gasPrice)
+                  console.log(true);
+                  
+                  // continue; // Breaks out of the loop when a match is found
+              }
+            }
+            console.log(stationPrices);
+            console.log(gasPrice);
             fromAddress(address).then(({ results }) => {
               const { lat, lng } = results[0].geometry.location;
               let markerPos = {
@@ -286,6 +330,7 @@ const Search = () => {
               <div className="info-window-content">
                 <h3>{selectedMarker.name}</h3>
                 <h4>{selectedMarker.address}</h4>
+                <h4>{gasPrice.shift()}</h4>
                 <button
                   type="submit"
                   onClick={calculateRoute}
