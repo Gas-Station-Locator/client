@@ -10,25 +10,32 @@ const About = () => {
       <h1>About</h1>
       <div className="imageDesc1">
         <img src={doge} alt="Description" className="image" />
-        <p>Ethan Jacinto, Sophomore at CPP</p>
+        <div className="text-container">
+          <p>
+            Sample Text Hyperspace cam LLLLLLLl LLLLLLLLLLLLLLLLLLLLLLLLLLLLL{" "}
+          </p>
+        </div>
       </div>
 
-      <div className="imageDesc1">
-        <p>Cody Apolinar, Senior at CPP </p>
-
-        <img src={chicken} alt="Description" className="image" />
+      <div className="imageDesc2">
+        <div className="text-container">
+          <p>Sample Text Hyperspace cam </p>
+        </div>
+        <img src={doge} alt="Description" className="image" />
       </div>
 
-      <div className="imageDesc1">
-        <img src={cat} alt="Description" className="image" />
-
-        <p>Elvin Nguyen, Sophomore at CPP</p>
+      <div className="imageDesc2">
+        <img src={doge} alt="Description" className="image" />
+        <div className="text-container">
+          <p>Sample Text Hyperspace cam </p>
+        </div>
       </div>
 
-      <div className="imageDesc1">
-        <p>James Salac, Sophomore at CPP </p>
-
-        <img src={cat} alt="Description" className="image" />
+      <div className="imageDesc2">
+        <div className="text-container">
+          <p>Sample Text Hyperspace cam </p>
+        </div>
+        <img src={doge} alt="Description" className="image" />
       </div>
     </div>
   );
