@@ -7,7 +7,7 @@ import cat from "./images/pop.jpg";
 const About = () => {
   return (
     <div className="main">
-      <h1>About</h1>
+      <h1>About Us</h1>
       <div className="imageDesc1">
         <img src={doge} alt="Description" className="image" />
         <p>Ethan Jacinto, Sophomore at CPP</p>

@@ -7,24 +7,20 @@ div .main{
 	margin: 10px;
 	display: flex;
 	align-items: center;
-	margin-left: auto;
-	margin-right: auto;
 	justify-content: center;
+	text-align: center;
 
   } 
 .image {
 	width: 220px;
 	height: 165px;
-	float: center;
-	align-items: center;
 	border: 3px solid white;
 	border-radius: 10px;
 	margin: 10px;
 
   }
 .imageDesc1 p{
-	background-color: lightgrey;
-	float: center;
+	background-color: rgb(130, 0, 0);
 	width: 600px;
 	height: 169px;
 	text-align: center;
