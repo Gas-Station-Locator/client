@@ -56,6 +56,9 @@ const Search = () => {
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries: ["places"],
+    onError: (error) => {
+      console.error("Error loading Google Maps API:", error);
+    }
   });
 
   const [map, setMap] = useState(/** @type google.maps.Map */ (null));
@@ -138,7 +141,7 @@ const Search = () => {
       return;
     }
     if (originRef.current.value === "" || !selectedMarker) {
-      console.log("woops");
+      console.log("Please enter origin and select a destination");
       return;
     }
     const directionsService = new google.maps.DirectionsService();
@@ -147,6 +150,9 @@ const Search = () => {
       destination: selectedMarker.address,
       travelMode: google.maps.TravelMode.DRIVING,
     });
+
+    clearRoute();
+
     setDirectionsResponse(results);
     setDistance(results.routes[0].legs[0].distance.text);
     setDuration(results.routes[0].legs[0].duration.text);
@@ -293,8 +299,8 @@ const Search = () => {
                 >
                   Calculate Route
                 </button>
-                <p className="destination-info">Distance: </p>
-                <p className="destination-info">Duration: </p>
+                <p className="destination-info">Distance: {distance}</p>
+                <p className="destination-info">Duration: {duration}</p>
               </div>
             </InfoWindowF>
           )}
