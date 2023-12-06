@@ -18,7 +18,7 @@ function Login() {
           <input type="password" id="password" className="login-input" />
         </div>
         <button type="submit" className="login-submit-btn">
-          Login
+          <Link to="/Gas-Station-Locator" style={{color:"white", textDecoration:"none"}}>Login</Link>
         </button>
 
         <button type="submit" className="login-sign-up-btn">
