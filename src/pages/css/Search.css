@@ -1,5 +1,5 @@
 @import url("https://fonts.cdnfonts.com/css/open-sans");
-@import url(https://fonts.googleapis.com/css2?family=Space+Mono&display=swap);
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono&display=swap");
 
 .map {
   position: relative;
@@ -20,14 +20,14 @@
 .search {
   position: absolute;
   width: 500px;
-  height: 340px;
+  height: 110px;
   left: 2.5%;
   top: 2.5%;
   padding: 4;
-  border: 2px solid black;
+  padding-top: 5px;
+  margin-top: 4px;
   border-radius: 10px;
-  margin-top: 4;
-  background-color: white;
+  box-shadow: 1px 1px 23px 2px black;
   z-index: 3;
   font-family: "Open Sans";
 }
@@ -42,6 +42,7 @@
   width: 400px;
   height: 20px;
   border-radius: 10px;
+  border-width: 3px;
   margin-top: 10px;
   margin-bottom: 10px;
   text-align: center;
@@ -52,31 +53,17 @@
   outline: none;
 }
 
-.destination-dropdown {
-  width: 420px;
-  height: 35px;
-  border: 2px solid black;
-  margin-top: 16px;
-  text-align: center;
-  font-size: 20px;
-}
-
-.destination-dropdown option {
-  border: 2px solid black;
-  border-radius: 10px;
-}
-
 .btn {
   border-radius: 5px;
   background-color: white;
 }
 
 .search-btn {
-  margin-right: 20px;
+  margin-right: 35px;
 }
 
 .map-btn {
-  scale: calc(120%);
+  scale: calc(130%);
 }
 
 .destination-info {
@@ -88,27 +75,17 @@
   scale: calc(110%);
 }
 
-.clear-btn,
 .position-btn {
   width: 70px;
   height: 70px;
   margin-top: -10px;
+  background-color: white;
   border: 2px solid black;
   border-radius: 50%;
-  background-color: white;
-  scale: calc(90%);
-}
-
-.clear-btn {
-  margin-right: 2.5px;
-  font-family: "Open Sans";
-  font-size: 20px;
-}
-
-.position-btn {
   border-width: 3px;
   font-family: "Space Mono";
   font-size: 15px;
+  scale: calc(90%);
 }
 
 .position {
@@ -127,7 +104,7 @@
   color: black;
   border: 2px solid black;
   border-radius: 6px;
-  margin-top: 25px;
+  margin-top: 30px;
 }
 
 .search-results-container h1 {
@@ -137,4 +114,14 @@
 
 .search-result {
   padding-right: 30px;
+}
+
+.info-window-content h3 {
+  font-size: 30px;
+  font-family: "Space Mono";
+  margin-bottom: 10px;
+}
+
+.info-window-content .map-btn {
+  margin-bottom: 10px;
 }
