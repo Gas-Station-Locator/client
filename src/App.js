@@ -1,3 +1,4 @@
+
 import React from "react";
 import {
   BrowserRouter as Router,
@@ -12,6 +13,7 @@ import About from "./pages/About";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Search from "./pages/Search";
+
 // components
 import NavBar from "./components/NavBar";
 // css
@@ -40,6 +42,7 @@ const AppRoutes = () => {
         <Route path="/Login" element={<Login />} />
         <Route path="/About-Us" element={<About />} />
         <Route path="/Gas-Station-Locator" element={<HomePage />} />
+
         <Route path="/Search" element={<Search />} />
         <Route
           path="/"

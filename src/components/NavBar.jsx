@@ -6,6 +6,7 @@ import ImageChevron from "../assets/images/chevron.png";
 import ImageMobil from "../assets/images/mobil.png";
 
 const NavBar = () => {
+
   return (
     <nav className="nav-container">
       <div id="nav-images">
@@ -19,5 +20,6 @@ const NavBar = () => {
     </nav>
   );
 };
+
 
 export default NavBar;
