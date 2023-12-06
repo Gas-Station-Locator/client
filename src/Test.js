@@ -11,22 +11,22 @@ function App(){
 
     // return(
         
-    const URL = `https://localhost:4000/getStations/results`;
+    const URL = `https://localhost:4000/getStations/`;
 
     const [stations, setStations] = useState([]);
-    async function downloadPrice(index) {
-        const commentsURL = getstations/results;
-        const response = await fetch(commentsURL);
-        const comments = await resasyncponse.json();
-        return comments;
-    }
+    // async function downloadPrice(index) {
+    //     const commentsURL = getstations/results;
+    //     const response = await fetch(commentsURL);
+    //     const comments = await resasyncponse.json();
+    //     return comments;
+    // }
 
     useEffect(() => {
       const fetchData = async () => {
         const response = await fetch('/getStations');
         const data = await response.json();
 
-        setStations(data);
+        setStations(data[0].results);
         // console.log(data[0].results[0]);
       };
       fetchData();
@@ -34,32 +34,17 @@ function App(){
 
     return (
         <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>
-                            Name
-                        </th>
-                        <th>
-                            Address
-                        </th>
-                        <th>
-                            Price
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        stations.map((station) => {
-                            <tr>
-                                {console.log(station)}
-                                <td>{station[0]}</td>
-                                <td>{station.address}</td>
-                            </tr>
-                        })
-                    }
-                </tbody>
-            </table>
+            <p>hi
+            {
+                stations.map((station) => {
+                    <h1>
+                        {console.log(station.title)}
+                        {station.gasPrices}
+                        {station.address}
+                    </h1>
+                })
+            }
+            </p>
         </div>
     )
 }
