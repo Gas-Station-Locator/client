@@ -50,7 +50,7 @@ const Search = () => {
   const [selectedMarker, setSelectedMarker] = useState(null);
 
   useEffect(() => {
-    console.log(stations);
+    console.log(stations);  
   }, [stations]);
 
   const { isLoaded, loadError } = useJsApiLoader({
