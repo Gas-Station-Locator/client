@@ -16,8 +16,7 @@ const NavBar = () => {
       </div>
       <Link to="/Gas-Station-Locator">Gas Station Locator</Link>
       <Link to="/About-Us">About Us</Link>
-      <Link to="/Contact-Us">Contact Us</Link>
-      <Link to="/Login">Sign In</Link>
+      <Link to="/Login">Login</Link>
     </nav>
   );
 };

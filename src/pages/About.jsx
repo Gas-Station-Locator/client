@@ -1,34 +1,47 @@
 import React from "react";
-import "./css/AboutUs.css";
+import "./css/About.css";
 import doge from "./images/doge.jpg";
 import chicken from "./images/chicken.png";
 import cat from "./images/pop.jpg";
 
 const About = () => {
   return (
-    <div className="main">
-      <h1>About Us</h1>
-      <div className="imageDesc1">
-        <img src={doge} alt="Description" className="image" />
-        <p>Ethan Jacinto, Sophomore at CPP</p>
+    <div className="about">
+      <h1>About</h1>
+      <div className="about-container">
+        <img src={doge} alt="Description" className="about-image" />
+        <p>
+          <strong>Ethan Jacinto:</strong><br/>Sophomore at Cal Poly Pomona, graduating next year and hoping to
+          become a Software Engineer
+        </p>
+        <br />
       </div>
 
-      <div className="imageDesc1">
-        <p>Cody Apolinar, Senior at CPP </p>
-
-        <img src={chicken} alt="Description" className="image" />
+      <div className="about-container">
+        <p>
+        <strong>Cody Apolinar:</strong><br/>
+          Senior at Cal Poly Pomona, hoping to get a job as a Software
+          Engineer/Dev
+        </p>
+        <img src={chicken} alt="Description" className="about-image" />
       </div>
 
-      <div className="imageDesc1">
-        <img src={cat} alt="Description" className="image" />
-
-        <p>Elvin Nguyen, Sophomore at CPP</p>
+      <div className="about-container">
+        <img src={cat} alt="Description" className="about-image" />
+        <p>
+        <strong>Elvin Nguyen:</strong><br/>
+          Sophomore at Cal Poly Pomona. I am hoping to become a Software
+          Engineer and get a job as a Software Engineer when I graduate
+        </p>
       </div>
 
-      <div className="imageDesc1">
-        <p>James Salac, Sophomore at CPP </p>
-
-        <img src={cat} alt="Description" className="image" />
+      <div className="about-container">
+        <p>
+        <strong>James Salac:</strong><br/>
+          Sophomore at Cal Poly Pomona, and I am hoping to become a Software
+          Engineer
+        </p>
+        <img src={cat} alt="Description" className="about-image" />
       </div>
     </div>
   );

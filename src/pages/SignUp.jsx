@@ -1,31 +1,27 @@
-import './css/SignUp.css';
-import React from 'react'
-import { Link } from 'react-router-dom'
-function login() {
+import "./css/SignUp.css";
+import React from "react";
+import { Link } from "react-router-dom";
+function SignUp() {
   return (
-    <div className="App">
-      <h1>
-		Thank you for Signing Up
-	  </h1>
-	  <p>
-		Please enter your information below
-	  </p>
+    <div className="sign-up">
+      <h1>Thank you for Signing Up</h1>
+      <p>Please enter your information below</p>
 
-	  <form>
-        <div className="input-group">
+      <form className="sign-up-form">
+        <div className="sign-up-input-group">
           <label htmlFor="name">Username:</label>
-          <input type="text" id="name" />
+          <input type="text" id="name" className="sign-up-input"/>
         </div>
-        <div className="input-group">
+        <div className="sign-up-input-group">
           <label htmlFor="password">Password:</label>
-          <input type="password" id="password" />
+          <input type="password" id="password" className="sign-up-input"/>
         </div>
-		<button type="submit" className="sign-btn">
-		<Link to="/Login">Sign up with entered Info</Link>
+        <button type="submit" className="sign-up-btn">
+          <Link to="/Login" style={{color:"white", textDecoration:"none"}}>Sign up with entered Info</Link>
         </button>
       </form>
     </div>
   );
 }
 
-export default login;
+export default SignUp;

@@ -10,9 +10,8 @@ import {
 // pages
 import HomePage from "./pages/HomePage";
 import About from "./pages/About";
-import Contact from "./pages/Contact";
-import SignIn from "./pages/Login";
-import SignUp from './pages/SignUp'
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 import Search from "./pages/Search";
 
 // components
@@ -39,9 +38,8 @@ const AppRoutes = () => {
     <>
       {showNavBar && <NavBar />}
       <Routes>
-        <Route path="/Login" element={<SignIn />} />
-        <Route path="SignUp" element={<SignUp/>} />
-        <Route path="/Contact-Us" element={<Contact />} />
+        <Route path="/Sign-Up" element={<SignUp />} />
+        <Route path="/Login" element={<Login />} />
         <Route path="/About-Us" element={<About />} />
         <Route path="/Gas-Station-Locator" element={<HomePage />} />
 

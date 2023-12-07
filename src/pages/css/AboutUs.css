@@ -10,7 +10,7 @@ div .main{
 	justify-content: center;
 	text-align: center;
 
-  } 
+} 
 .image {
 	width: 220px;
 	height: 165px;
@@ -18,7 +18,7 @@ div .main{
 	border-radius: 10px;
 	margin: 10px;
 
-  }
+}
 .imageDesc1 p{
 	background-color: rgb(130, 0, 0);
 	width: 600px;
@@ -26,4 +26,4 @@ div .main{
 	text-align: center;
 	justify-content: center;
 
-  }
+}
