@@ -1,10 +1,12 @@
 .about {
-  margin-top: -190px;
-  margin-left: 600px;
+  top: 50%;
+  left: 50%;
+  margin-top: -325px;
+  margin-left: 300px;
   overflow: hidden;
   height: 1300px;
   width: 900px;
-  scale: calc(80%);
+  scale: calc(55%);
 }
 
 .about h1 {

@@ -1,8 +1,9 @@
 .login {
-  margin-top: 80px;
-  overflow: hidden;
+  margin-top: -50px;
+  overflow: auto;
+  overflow-y: scroll;
   height: 750px;
-  scale: calc(135%);
+  scale: calc(100%);
 }
 
 .login h1 {
