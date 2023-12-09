@@ -7,22 +7,10 @@ import {
   DirectionsRenderer,
   InfoWindowF,
 } from "@react-google-maps/api";
-import {
-  setKey,
-  setDefaults,
-  setLanguage,
-  setRegion,
-  fromAddress,
-  fromLatLng,
-  fromPlaceId,
-  setLocationType,
-  geocode,
-  RequestType,
-} from "react-geocode";
+import { setDefaults, fromAddress } from "react-geocode";
 import { useTheme } from "../assets/ThemeContext";
 import "./css/Search.css";
 
-// let defaultCenter = { lat: 34.01804962044509, lng: -117.90501316026715 };
 let defaultCenter = { lat: 32.7157, lng: -117.1611 };
 const google = window.google;
 setDefaults({
@@ -30,15 +18,6 @@ setDefaults({
   language: "en",
   region: "es",
 });
-
-//function to output langitude and latitude
-/*
-  fromAddress(destinationRef.current.value)
-  .then(({ results }) => {
-    const { lat, lng } = results[0].geometry.location;
-    console.log(lat, lng);
-  })
-*/
 
 const Search = () => {
   const { theme, toggleTheme } = useTheme();
@@ -66,20 +45,21 @@ const Search = () => {
   let stationPrices = [];
   const arrayOfNamesAndPrices = [];
 
-  stationsList.map((item)=>{
-    stationTitle.push([item.title])
-  })
-  stationsList.map((item)=>{
-    stationPrices.push([item.gasPrices[0].priceTag])
-  })
-  // {console.log(stationPrices[Math.floor(Math.random()*stationPrices.length)])}
-  for(let i=0; i<stationTitle.length; i++) {
-    arrayOfNamesAndPrices[i] = { title: stationTitle[i][0], price: stationPrices[i][0]};
+  stationsList.map((item) => {
+    stationTitle.push([item.title]);
+  });
+  stationsList.map((item) => {
+    stationPrices.push([item.gasPrices[0].priceTag]);
+  });
+  for (let i = 0; i < stationTitle.length; i++) {
+    arrayOfNamesAndPrices[i] = {
+      title: stationTitle[i][0],
+      price: stationPrices[i][0],
+    };
   }
-  // console.log(arrayOfNamesAndPrices);
 
   useEffect(() => {
-    console.log(stations);  
+    console.log(stations);
   }, [stations]);
 
   const { isLoaded, loadError } = useJsApiLoader({
@@ -87,7 +67,7 @@ const Search = () => {
     libraries: ["places"],
     onError: (error) => {
       console.error("Error loading Google Maps API:", error);
-    }
+    },
   });
 
   const [map, setMap] = useState(/** @type google.maps.Map */ (null));
@@ -97,8 +77,6 @@ const Search = () => {
 
   /**@type React.MutableRefObject<HTMLInputElement */
   const originRef = useRef();
-  /**@type React.MutableRefObject<HTMLInputElement */
-  const destinationRef = useRef();
 
   if (!isLoaded) {
     return "LOADING...";
@@ -113,7 +91,6 @@ const Search = () => {
       setLng(props.lng);
     }, [props.lat, props.lng]);
 
-    // let defaultCenter = {lat: props.lat, lng: props.lng}
     const URL = `https://api.tomtom.com/search/2/nearbySearch/.json?lat=${lat}&lon=${lng}&radius=10000&categorySet=7311&view=Unified&relatedPois=off&key=${process.env.REACT_APP_TOM_KEY}`;
 
     const [data, setData] = useState([]);
@@ -135,17 +112,11 @@ const Search = () => {
           {data.map((item) => {
             let address = `${item.address.streetNumber} ${item.address.streetName}, ${item.address.municipality}, ${item.address.countrySubdivision} ${item.address.postalCode}`;
             let stationName = `${item.poi.name}`;
-            console.log(stationName)
+            console.log(stationName);
             for (let i = 0; i < stationTitle.length; i++) {
               if (stationTitle[i][0] === stationName) {
-                  setGasPrice((gasPrice) => [
-                    ...gasPrice,
-                    stationPrices[i][0]
-                  ]);
-                  // console.log(gasPrice)
-                  console.log(true);
-                  
-                  // continue; // Breaks out of the loop when a match is found
+                setGasPrice((gasPrice) => [...gasPrice, stationPrices[i][0]]);
+                console.log(true);
               }
             }
             console.log(stationPrices);
@@ -163,16 +134,7 @@ const Search = () => {
                 ...gasMarkersArr,
                 markerPos,
               ]);
-              // gasMarkersArr.push({gasMarkers})
-              // console.log(gasMarkersArr)
             });
-            /**
-            return (
-              <li key={item.id}>
-                Address: {address} --- Name: {item.poi.name}
-              </li>
-            );
-            */
           })}
         </ul>
       </div>
@@ -207,27 +169,8 @@ const Search = () => {
       return;
     }
     newLocation();
-    /** 
-      fromAddress(originRef.current.value).then(({ results }) => {
-        const { lat, lng } = results[0].geometry.location;
-        defaultCenter = { lat: lat, lng: lng };
-      });
-    */
     map.panTo(defaultCenter);
     console.log(defaultCenter.lat, defaultCenter.lng);
-
-    /** 
-      return (
-        <div>
-          <p>The nearest gas stations are: </p>
-          {<Stations lat={defaultCenter.lat} lng={defaultCenter.lng} /> /}
-        </div>
-      );
-      <GoogleMap>
-        <MarkerF position={defaultCenter}/>
-      </GoogleMap>
-        addMarker(defaultCenter);
-    */
   }
 
   function newLocation() {
@@ -240,23 +183,7 @@ const Search = () => {
   }
 
   function nearestStations() {
-    setStations(
-      <Tom lat={defaultCenter.lat} lng={defaultCenter.lng} />
-      /**
-      <div
-        className="search-results-container"
-        style={{
-          color: theme === "dark" ? "black" : "white",
-          background: theme === "dark" ? "#f1f3f4" : "#3c4042",
-        }}
-      >
-        {/<h1>The nearest gas stations are:</h1>}
-        <div className="search-result">
-          <Tom lat={defaultCenter.lat} lng={defaultCenter.lng} />
-        </div>
-      </div>
-      */
-    );
+    setStations(<Tom lat={defaultCenter.lat} lng={defaultCenter.lng} />);
   }
 
   function clearRoute() {
@@ -383,8 +310,6 @@ const Search = () => {
           type="submit"
           onClick={() => {
             searchPlace();
-            // setLat(defaultCenter.lat);
-            // setLng(defaultCenter.lng);
             setGasMarkersArr([]);
           }}
         >
